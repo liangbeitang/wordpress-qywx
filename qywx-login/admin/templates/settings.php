@@ -92,6 +92,7 @@ if (!defined('ABSPATH')) {
                 <th><?php echo esc_html__('企业微信字段', 'qywx-login'); ?></th>
                 <th><?php echo esc_html__('WP 字段', 'qywx-login'); ?></th>
                 <th><?php echo esc_html__('匹配是否成功', 'qywx-login'); ?></th>
+                <th><?php echo esc_html__('操作', 'qywx-login'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -107,17 +108,55 @@ if (!defined('ABSPATH')) {
                         <td><?php echo esc_html($qywx_field); ?></td>
                         <td><?php echo esc_html($wp_field); ?></td>
                         <td><?php echo $is_matched ? esc_html__('是', 'qywx-login') : esc_html__('否', 'qywx-login'); ?></td>
+                        <td><a href="<?php echo admin_url('admin.php?action=delete_mapping_rule&qywx_field=' . urlencode($qywx_field)); ?>" onclick="return confirm('<?php echo esc_js(__('确定要删除此映射规则吗？', 'qywx-login')); ?>')"><?php echo esc_html__('删除', 'qywx-login'); ?></a></td>
                     </tr>
                     <?php
                 }
             } else {
                 ?>
                 <tr>
-                    <td colspan="3"><?php echo esc_html__('暂无映射规则，请配置。', 'qywx-login'); ?></td>
+                    <td colspan="4"><?php echo esc_html__('暂无映射规则，请配置。', 'qywx-login'); ?></td>
                 </tr>
                 <?php
             }
             ?>
+            <tr>
+                <td><input type="text" id="new_qywx_field" name="new_qywx_field" class="regular-text" /></td>
+                <td><input type="text" id="new_wp_field" name="new_wp_field" class="regular-text" /></td>
+                <td></td>
+                <td><button type="button" id="add_mapping_rule"><?php echo esc_html__('添加映射规则', 'qywx-login'); ?></button></td>
+            </tr>
         </tbody>
     </table>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#add_mapping_rule').on('click', function() {
+                var qywx_field = $('#new_qywx_field').val();
+                var wp_field = $('#new_wp_field').val();
+                if (qywx_field && wp_field) {
+                    $.ajax({
+                        url: ajaxurl,
+                        type: 'POST',
+                        data: {
+                            action: 'add_mapping_rule',
+                            qywx_field: qywx_field,
+                            wp_field: wp_field
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                location.reload();
+                            } else {
+                                alert(response.data.message);
+                            }
+                        },
+                        error: function() {
+                            alert('<?php echo esc_js(__('添加映射规则时出现错误，请稍后再试。', 'qywx-login')); ?>');
+                        }
+                    });
+                } else {
+                    alert('<?php echo esc_js(__('企业微信字段和 WP 字段都不能为空。', 'qywx-login')); ?>');
+                }
+            });
+        });
+    </script>
 </div>

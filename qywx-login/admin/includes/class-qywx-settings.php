@@ -12,6 +12,10 @@ class QYWX_Settings {
         add_action('admin_init', array($this, 'register_settings'));
         // 添加后台菜单页面，方便用户访问设置页面
         add_action('admin_menu', array($this, 'add_admin_menu'));
+        // 处理添加映射规则的 AJAX 请求
+        add_action('wp_ajax_add_mapping_rule', array($this, 'add_mapping_rule'));
+        // 处理删除映射规则的请求
+        add_action('admin_post_delete_mapping_rule', array($this, 'delete_mapping_rule'));
     }
 
     /**
@@ -150,6 +154,50 @@ class QYWX_Settings {
             </form>
         </div>
         <?php
+    }
+
+    /**
+     * 处理添加映射规则的 AJAX 请求
+     */
+    public function add_mapping_rule() {
+        if (!wp_doing_ajax()) {
+            wp_die(__('非法请求', 'qywx-login'));
+        }
+        check_ajax_referer('add_mapping_rule', 'security');
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('你没有权限执行此操作。', 'qywx-login')));
+        }
+
+        $qywx_field = sanitize_text_field($_POST['qywx_field']);
+        $wp_field = sanitize_text_field($_POST['wp_field']);
+
+        if ($qywx_field && $wp_field) {
+            $mapping_rules = get_option('qywx_user_field_map', array());
+            $mapping_rules[$qywx_field] = $wp_field;
+            update_option('qywx_user_field_map', $mapping_rules);
+            wp_send_json_success();
+        } else {
+            wp_send_json_error(array('message' => __('企业微信字段和 WP 字段都不能为空。', 'qywx-login')));
+        }
+    }
+
+    /**
+     * 处理删除映射规则的请求
+     */
+    public function delete_mapping_rule() {
+        check_admin_referer('delete_mapping_rule');
+        if (!current_user_can('manage_options')) {
+            wp_die(__('你没有权限执行此操作。', 'qywx-login'));
+        }
+
+        $qywx_field = sanitize_text_field($_POST['qywx_field']);
+        $mapping_rules = get_option('qywx_user_field_map', array());
+        if (isset($mapping_rules[$qywx_field])) {
+            unset($mapping_rules[$qywx_field]);
+            update_option('qywx_user_field_map', $mapping_rules);
+        }
+        wp_safe_redirect(admin_url('admin.php?page=qywx-settings'));
+        exit;
     }
 }
 
