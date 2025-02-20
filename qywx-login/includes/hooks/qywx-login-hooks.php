@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 // 包含必要的类文件
-require_once plugin_dir_path(dirname(__FILE__, 2)) . '/includes/core/class-qywx-auth.php';
+require_once plugin_dir_path(dirname(__FILE__, 2)) . 'core/class-qywx-auth.php';
 
 /**
  * 重定向未登录用户到企业微信登录页面
