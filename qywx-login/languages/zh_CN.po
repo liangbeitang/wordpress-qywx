@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: qywx-login\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-20 12:00+0800\n"
+"PO-Revision-Date: 2025-02-20 12:00+0800\n"
+"Last-Translator: Your Name <your.email@example.com>\n"
+"Language-Team: Chinese (China) <yourteam@example.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# 企业微信登录设置相关
+msgid "企业微信登录设置"
+msgstr "企业微信登录设置"
+
+msgid "企业微信 CorpID"
+msgstr "企业微信 CorpID"
+
+msgid "请输入您企业微信的 CorpID，可在企业微信管理后台获取。"
+msgstr "请输入您企业微信的 CorpID，可在企业微信管理后台获取。"
+
+msgid "企业微信 Secret"
+msgstr "企业微信 Secret"
+
+msgid "请输入您企业微信的 Secret，可在企业微信管理后台获取。"
+msgstr "请输入您企业微信的 Secret，可在企业微信管理后台获取。"
+
+msgid "用户名字段映射"
+msgstr "用户名字段映射"
+
+msgid "请输入企业微信字段与 WordPress 用户名的映射规则，例如 \"userid\"。"
+msgstr "请输入企业微信字段与 WordPress 用户名的映射规则，例如 \"userid\"。"
+
+msgid "默认用户组"
+msgstr "默认用户组"
+
+msgid "选择新用户注册时默认分配的用户组。"
+msgstr "选择新用户注册时默认分配的用户组。"
+
+msgid "禁用密码修改"
+msgstr "禁用密码修改"
+
+msgid "勾选此项将禁止用户在 WordPress 后台修改密码。"
+msgstr "勾选此项将禁止用户在 WordPress 后台修改密码。"
+
+# 部门架构同步相关
+msgid "企业微信部门架构同步"
+msgstr "企业微信部门架构同步"
+
+msgid "点击下面的按钮可以手动同步企业微信的部门架构到 WordPress。"
+msgstr "点击下面的按钮可以手动同步企业微信的部门架构到 WordPress。"
+
+msgid "建议通过 WP - Cron 每日自动执行此操作以保持数据最新。"
+msgstr "建议通过 WP - Cron 每日自动执行此操作以保持数据最新。"
+
+msgid "立即同步部门架构"
+msgstr "立即同步部门架构"
+
+msgid "注意：同步操作可能会消耗一定的时间和系统资源，尤其是在企业微信部门架构较大的情况下。"
+msgstr "注意：同步操作可能会消耗一定的时间和系统资源，尤其是在企业微信部门架构较大的情况下。"
+
+# 扫码登录相关
+msgid "请使用企业微信扫码登录"
+msgstr "请使用企业微信扫码登录"
+
+msgid "扫码后，您将使用企业微信账号登录本系统。"
+msgstr "扫码后，您将使用企业微信账号登录本系统。"
+
+# 同步结果相关
+msgid "企业微信部门架构和用户信息同步成功！"
+msgstr "企业微信部门架构和用户信息同步成功！"
+
+msgid "企业微信部门架构和用户信息同步失败，请检查配置或网络连接。"
+msgstr "企业微信部门架构和用户信息同步失败，请检查配置或网络连接。"

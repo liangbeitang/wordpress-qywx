@@ -1,0 +1,65 @@
+/* 通用样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* 登录按钮样式 */
+.qywx-login-button {
+    display: inline-block;
+    background-color: #0081ff;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.qywx-login-button:hover {
+    background-color: #0069d9;
+}
+
+/* 加载提示样式 */
+.qywx-login-loading {
+    margin-top: 10px;
+    color: #888;
+    font-size: 14px;
+}
+
+/* 二维码图片样式 */
+.qywx-login-qr-code {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 错误提示样式 */
+.qywx-login-error {
+    margin-top: 10px;
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* 登录成功提示样式 */
+.qywx-login-success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #28a745;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 4px;
+    font-size: 18px;
+    z-index: 1000;
+}
