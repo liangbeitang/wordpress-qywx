@@ -2,6 +2,41 @@
 
 ## 一、插件概述
 企业微信登录插件为 WordPress 网站提供了使用企业微信扫码登录的功能。用户可以通过扫描企业微信二维码快速登录到 WordPress 网站，同时插件支持部门架构和用户信息的同步，方便企业进行用户管理。
+/qywx-login/
+├── /admin/                  # 管理后台相关
+│   ├── /includes/           # 后台类与函数
+│   │   ├── class-qywx-settings.php
+│   │   └── class-qywx-sync.php
+│   ├── /templates/          # 后台模板文件
+│   │   ├── settings.php
+│   │   └── sync-department.php
+│   └── qywx-admin.php       # 后台菜单注册
+├── /includes/               # 核心功能模块
+│   ├── /core/               # 核心类
+│   │   ├── class-qywx-auth.php
+│   │   └── class-qywx-user.php
+│   ├── /hooks/              # 钩子与过滤器
+│   │   ├── qywx-login-hooks.php
+│   │   └── qywx-password-hooks.php
+│   └── /utils/              # 工具函数
+│       ├── qywx-api.php
+│       └── qywx-password.php
+├── /public/                 # 前端页面
+│   ├── /login/              # 企业微信登录页面
+│   │   ├── qywx-login.php
+│   │   └── qywx-callback.php
+│   └── /sync/               # 部门架构同步页面
+│       └── qywx-sync.php
+├── /languages/              # 多语言支持
+│   └── /zh_CN/             # 中文语言包
+├── /assets/                 # 静态资源
+│   ├── /js/                # JavaScript文件
+│   │   └── qywx-login.js
+│   └── /css/               # CSS文件
+├── qywx-login.php           # 主插件文件
+├── qywx-login.php.dist       # 主插件文件（示例）
+├── readme.md                # 插件说明文件
+└── license.txt              # 许可证文件
 
 ## 二、功能特性
 1. **企业微信扫码登录**：支持用户使用企业微信扫码快速登录 WordPress 网站。

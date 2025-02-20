@@ -18,43 +18,58 @@ class QYWX_Settings {
      * 注册设置项，将设置存储在 WordPress 选项表中
      */
     public function register_settings() {
-        // 注册一个设置组，将相关设置项组织在一起
-        register_setting(
-            'qywx_settings_group', // 设置组的名称
-            'qywx_corpid', // 企业微信的 CorpID 设置项
-            array(
-                'type' => 'string', // 设置项的数据类型为字符串
-                'sanitize_callback' => 'sanitize_text_field', // 对输入进行清理，防止 XSS 攻击
-                'default' => '' // 默认值为空
-            )
-        );
-        register_setting(
-            'qywx_settings_group',
-            'qywx_secret', // 企业微信的 Secret 设置项
-            array(
+        $settings = array(
+            'qywx_corpid' => array(
                 'type' => 'string',
                 'sanitize_callback' => 'sanitize_text_field',
                 'default' => ''
-            )
-        );
-        register_setting(
-            'qywx_settings_group',
-            'user_field_map', // 用户名字段映射设置项
-            array(
+            ),
+            'qywx_secret' => array(
                 'type' => 'string',
                 'sanitize_callback' => 'sanitize_text_field',
                 'default' => ''
-            )
-        );
-        register_setting(
-            'qywx_settings_group',
-            'default_role', // 新用户默认分配的用户组设置项
-            array(
+            ),
+            'user_field_map' => array(
                 'type' => 'string',
                 'sanitize_callback' => 'sanitize_text_field',
-                'default' => 'subscriber' // 默认用户组为订阅者
+                'default' => ''
+            ),
+            'default_role' => array(
+                'type' => 'string',
+                'sanitize_callback' => 'sanitize_text_field',
+                'default' => 'subscriber'
             )
         );
+
+        foreach ($settings as $setting => $args) {
+            register_setting(
+                'qywx_settings_group',
+                $setting,
+                $args
+            );
+        }
+
+        // 注册整个设置组
+        register_setting(
+            'qywx_settings_group',
+            'qywx_settings_group',
+            array(
+                'type' => 'array',
+                'sanitize_callback' => array($this, 'sanitize_settings_group'),
+                'default' => array()
+            )
+        );
+    }
+
+    /**
+     * 自定义清理回调函数，用于处理整个设置组的清理
+     *
+     * @param array $input 输入的设置数组
+     * @return array 清理后的设置数组
+     */
+    public function sanitize_settings_group($input) {
+        // 在这里可以添加对整个设置组的清理逻辑
+        return $input;
     }
 
     /**

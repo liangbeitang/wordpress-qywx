@@ -46,19 +46,6 @@ if (!defined('ABSPATH')) {
                     </p>
                 </td>
             </tr>
-            <!-- 用户名字段映射设置项 -->
-            <tr>
-                <th scope="row">
-                    <label for="user_field_map"><?php echo esc_html__('用户名字段映射', 'qywx-login'); ?></label>
-                </th>
-                <td>
-                    <input type="text" id="user_field_map" name="user_field_map"
-                           value="<?php echo esc_attr(get_option('user_field_map')); ?>" class="regular-text" />
-                    <p class="description">
-                        <?php echo esc_html__('请输入企业微信字段与 WordPress 用户名的映射规则，例如 "userid"。', 'qywx-login'); ?>
-                    </p>
-                </td>
-            </tr>
             <!-- 默认用户组设置项 -->
             <tr>
                 <th scope="row">
@@ -94,9 +81,43 @@ if (!defined('ABSPATH')) {
                 </td>
             </tr>
         </table>
-        <?php
-        // 输出保存设置的提交按钮
-        submit_button(esc_html__('保存设置', 'qywx-login'));
-        ?>
+        <?php submit_button(); ?>
     </form>
+
+    <!-- 配置单表格 -->
+    <h2><?php echo esc_html__('企业微信登录用户创建规则', 'qywx-login'); ?></h2>
+    <table class="widefat">
+        <thead>
+            <tr>
+                <th><?php echo esc_html__('企业微信字段', 'qywx-login'); ?></th>
+                <th><?php echo esc_html__('WP 字段', 'qywx-login'); ?></th>
+                <th><?php echo esc_html__('匹配是否成功', 'qywx-login'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // 获取真实的映射规则，这里假设从选项中获取
+            $mapping_rules = get_option('qywx_user_field_map', array());
+            if (!empty($mapping_rules)) {
+                foreach ($mapping_rules as $qywx_field => $wp_field) {
+                    // 这里可以根据实际逻辑判断是否匹配，暂时简单判断字段是否存在
+                    $is_matched = !empty($qywx_field) && !empty($wp_field);
+                    ?>
+                    <tr>
+                        <td><?php echo esc_html($qywx_field); ?></td>
+                        <td><?php echo esc_html($wp_field); ?></td>
+                        <td><?php echo $is_matched ? esc_html__('是', 'qywx-login') : esc_html__('否', 'qywx-login'); ?></td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                ?>
+                <tr>
+                    <td colspan="3"><?php echo esc_html__('暂无映射规则，请配置。', 'qywx-login'); ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+    </table>
 </div>
